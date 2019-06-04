@@ -13,6 +13,15 @@ let draggablePieces = piecesBoard.querySelectorAll("img")
 
 function switchImage() {
 	console.log(this.dataset.puzzleref);
+
+	// grab the corresponding background image (0,1,2 or 3)
+	// and get it from the imges folder images/nackGround
+	let bgImage = `./images/backGround${this.dataset.puzzleref}.jpg`;
+
+	// set background image style on the container
+	puzzleBoard.style.backgroundImage = `url(${bgImage})`;
+
+	debugger;
 }
 
 
@@ -46,6 +55,7 @@ dropZones.forEach(zone => {
 		e.target.appendChild(document.querySelector(`#${draggedElement}`))
 	});
 })
+
 
 
 })();
