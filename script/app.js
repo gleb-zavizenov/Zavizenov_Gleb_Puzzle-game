@@ -9,7 +9,15 @@ const piecesBoard = document.querySelector(".puzzle-pieces"),
 			dropZones = document.querySelectorAll(".drop-zone");
 
 let draggablePieces = piecesBoard.querySelectorAll("img")
-	//debugger;
+
+//index of items in array starts at index 0
+const imageNameArray = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
+//
+// for (i=0; i<imageNameArray.length; i++) {
+// 	console.log(imageNameArray[i])
+// }
+
+//debugger;
 
 function switchImage() {
 	console.log(this.dataset.puzzleref);
@@ -21,7 +29,15 @@ function switchImage() {
 	// set background image style on the container
 	puzzleBoard.style.backgroundImage = `url(${bgImage})`;
 
-	debugger;
+	//switching dragable images
+	draggablePieces.forEach((image, index) => {
+		//log the image and the index
+		//console.log(image,index);
+		//try to change each image source
+		image.src = `images/${imageNameArray[index] + this.dataset.puzzleref}.jpg`
+	});
+
+	//debugger;
 }
 
 
@@ -41,17 +57,21 @@ draggablePieces.forEach(piece => {
 
 // this is dragover and drop functionality
 dropZones.forEach(zone => {
+	// allow user to drag over an element
 	zone.addEventListener('dragover', function(e){
 		e.preventDefault();
 		console.log("Drugged spmething over me");
 	});
+	// allow user to drop an element
 	zone.addEventListener("drop", function(e){
-		e.preventDefault();
+		e.preventDefault();// don't do the default behavior
+		//instead, do the following
 		console.log("you droped somethig on me")
 
 		let draggedElement = e.dataTransfer.getData("text/plain");
 		console.log(draggedElement);
 
+		// add image to the drop zone
 		e.target.appendChild(document.querySelector(`#${draggedElement}`))
 	});
 })
