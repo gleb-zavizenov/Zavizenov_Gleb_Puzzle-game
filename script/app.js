@@ -57,25 +57,30 @@ draggablePieces.forEach(piece => {
 
 // this is dragover and drop functionality
 dropZones.forEach(zone => {
+
 	// allow user to drag over an element
 	zone.addEventListener('dragover', function(e){
 		e.preventDefault();
-		console.log("Drugged spmething over me");
+		console.log("Drugged something over me");
 	});
 	// allow user to drop an element
 	zone.addEventListener("drop", function(e){
+
 		e.preventDefault();// don't do the default behavior
 		//instead, do the following
-		console.log("you droped somethig on me")
+		console.log("you droped somethig on me");
 
 		let draggedElement = e.dataTransfer.getData("text/plain");
 		console.log(draggedElement);
 
 		// add image to the drop zone
-		e.target.appendChild(document.querySelector(`#${draggedElement}`))
+		//checking if a zone already has an element
+		if (zone.children.length < 1){
+			e.target.appendChild(document.querySelector(`#${draggedElement}`));
+		} else {
+			console.log("Zone already has an element");
+		}
 	});
 })
-
-
 
 })();
